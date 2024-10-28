@@ -9,7 +9,7 @@ contract InscriptionProxyFactory is Ownable {
     ProxyAdmin public immutable proxyAdmin;
 
     constructor() Ownable(msg.sender) {
-        proxyAdmin = new ProxyAdmin(msg.sender);
+        proxyAdmin = new ProxyAdmin(owner());
     }
 
     // deploy proxy
