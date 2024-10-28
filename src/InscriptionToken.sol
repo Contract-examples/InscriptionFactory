@@ -8,6 +8,7 @@ import "@openzeppelin-upgradeable/contracts/proxy/utils/Initializable.sol";
 // Upgradeable version of ERC20 token
 contract InscriptionToken is Initializable, ERC20Upgradeable, OwnableUpgradeable {
     constructor() {
+        // make sure no one can initialize this contract but the proxy
         _disableInitializers();
     }
 
