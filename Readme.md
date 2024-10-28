@@ -1,5 +1,4 @@
-# Foundry Template
-Foundry Template for arbitrum testnet
+# Inscription Factory
 
 ## Usage
 
