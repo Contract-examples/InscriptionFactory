@@ -6,9 +6,6 @@ import "@openzeppelin/contracts/proxy/transparent/ProxyAdmin.sol";
 import "@openzeppelin/contracts/access/Ownable.sol";
 
 contract InscriptionProxyFactory is Ownable {
-    // custom errors
-    error NotOwner();
-
     ProxyAdmin public immutable proxyAdmin;
 
     constructor() Ownable(msg.sender) {
