@@ -102,4 +102,9 @@ contract InscriptionLogicV2 is Initializable, UUPSUpgradeable, OwnableUpgradeabl
 
     // authorize upgrade(only owner)
     function _authorizeUpgrade(address newImplementation) internal override onlyOwner { }
+
+    // get token info
+    function getTokenInfo(address token) external view returns (TokenInfo memory) {
+        return tokenInfo[token];
+    }
 }
