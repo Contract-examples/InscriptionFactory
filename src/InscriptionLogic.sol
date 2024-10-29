@@ -48,6 +48,7 @@ contract InscriptionLogic is Initializable, UUPSUpgradeable, OwnableUpgradeable 
 
     // deploy inscription
     function deployInscription(string memory symbol, uint256 totalSupply, uint256 perMint) external returns (address) {
+        // check per mint amount
         if (perMint > totalSupply) revert PerMintExceedsTotalSupply();
 
         // Create new token using clone pattern
@@ -67,7 +68,11 @@ contract InscriptionLogic is Initializable, UUPSUpgradeable, OwnableUpgradeable 
     // mint inscription
     function mintInscription(address tokenAddr) external {
         TokenInfo storage info = tokenInfo[tokenAddr];
+
+        // check token is deployed by factory
         if (info.totalSupply == 0) revert TokenNotDeployedByFactory();
+
+        // check minted amount
         if (info.mintedAmount + info.perMint > info.totalSupply) revert ExceedsTotalSupply();
 
         // mint token
