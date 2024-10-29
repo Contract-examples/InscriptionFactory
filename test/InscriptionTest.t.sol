@@ -30,7 +30,7 @@ contract InscriptionTest is Test {
         factory = new InscriptionProxyFactory();
         logicV1 = new InscriptionLogic();
 
-        // call initialize function using UUPS pattern to deploy proxy
+        // call initialize function using UUPS to deploy proxy
         bytes memory initData = abi.encodeWithSelector(InscriptionLogic.initialize.selector, owner);
         proxy = factory.deployProxy(address(logicV1), initData);
     }
