@@ -60,6 +60,7 @@ contract InscriptionLogicV2 is Initializable, UUPSUpgradeable, OwnableUpgradeabl
         external
         returns (address)
     {
+        // check per mint amount
         if (perMint > totalSupply) revert PerMintExceedsTotalSupply();
 
         // Create new token using clone pattern
@@ -79,7 +80,9 @@ contract InscriptionLogicV2 is Initializable, UUPSUpgradeable, OwnableUpgradeabl
     // mint inscription
     function mintInscription(address tokenAddr) external payable {
         TokenInfo storage info = tokenInfo[tokenAddr];
+        // check token is deployed by factory
         if (info.totalSupply == 0) revert TokenNotDeployedByFactory();
+        // check per mint amount
         if (info.mintedAmount + info.perMint > info.totalSupply) revert ExceedsTotalSupply();
 
         // check payment
