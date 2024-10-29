@@ -74,11 +74,7 @@ forge script script/DeployProxyFactory.s.sol:DeployProxyFactoryScript --rpc-url 
 
 ## Result of "Deploy ProxyFactory"
 ```
-factory deployed at: 0x698B7eb92Cc151f6D63667ca48130D8f554a53B4
-OwnershipTransferred (index_topic_1 address previousOwner, index_topic_2 address newOwner)
-[topic0] 0x8be0079c531659141344cd1fd0a4f28419497f9722a3daafe3b4186f6b6457e0
-[topic1] 0x0000000000000000000000000000000000000000000000000000000000000000
-[topic2] 0x0000000000000000000000004e59b44847b379578588920ca78fbf26c0b4956c
+factory deployed at: 0x6b006fD6F9c965Ff2c6B7127Ecc2d230aCc18e76 
 ```
 
 
