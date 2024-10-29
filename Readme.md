@@ -128,4 +128,13 @@ txhash:https://sepolia.arbiscan.io/tx/0x3089871cb71c7bdaa8ab944cb61a47c415a3af33
   Token info.price: 10000000000000000
 ```
 
+## Upgrade to V2
+```
+forge script script/MintInscriptionV2.s.sol:MintInscriptionV2Script --rpc-url arbitrum_sepolia --broadcast --verify -vvvv
+```
+
+## Result of "Upgrade to V2"
+```
+txhash:https://sepolia.arbiscan.io/tx/0x3089871cb71c7bdaa8ab944cb61a47c415a3af33e9678cafb691c6ffbc5b8f86
+```
 
