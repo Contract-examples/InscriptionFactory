@@ -19,7 +19,7 @@ contract DeployV2Script is Script {
 
         // deploy
         InscriptionLogicV2 logic = new InscriptionLogicV2{ salt: SALT }();
-        // deployed at: 0x6CeF682028A46015462b176c6F36d2BCb19515EE
+        // deployed at: 0x5c77Ff2668b4defb7F17B74b9C3d05026E160F78
         console2.log("V2 deployed at:", address(logic));
 
         // stop broadcast
