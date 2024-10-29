@@ -64,7 +64,7 @@ forge script script/DeployV1.s.sol:DeployV1Script --rpc-url arbitrum_sepolia --b
 
 ## Result of "Deploy V1"
 ```
-https://sepolia.arbiscan.io/address/0x6cef682028a46015462b176c6f36d2bcb19515ee
+V1 deployed at:0x6CeF682028A46015462b176c6F36d2BCb19515EE
 ```
 
 ## Deploy ProxyFactory
