@@ -85,6 +85,6 @@ forge script script/DeployProxy.s.sol:DeployProxyScript --rpc-url arbitrum_sepol
 
 ## Result of "Deploy Proxy"
 ```
-https://sepolia.arbiscan.io/address/0x6cef682028a46015462b176c6f36d2bcb19515ee
+Proxy deployed at: 0xc7B704D8D43e554518ed324fB85Cd7067B56591d
 ```
 
