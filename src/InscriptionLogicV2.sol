@@ -1,25 +1,27 @@
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.28;
 
+import { UUPSUpgradeable } from "@openzeppelin-upgradeable/contracts/proxy/utils/UUPSUpgradeable.sol";
 import { Initializable } from "@openzeppelin-upgradeable/contracts/proxy/utils/Initializable.sol";
 import { OwnableUpgradeable } from "@openzeppelin-upgradeable/contracts/access/OwnableUpgradeable.sol";
 import { Clones } from "@openzeppelin/contracts/proxy/Clones.sol";
 import { InscriptionToken } from "./InscriptionToken.sol";
 
-contract InscriptionLogicV2 is Initializable, OwnableUpgradeable {
-    // custom errors
+// V2 InscriptionLogic
+contract InscriptionLogicV2 is Initializable, UUPSUpgradeable, OwnableUpgradeable {
+    // custom error
     error PerMintExceedsTotalSupply();
     error TokenNotDeployedByFactory();
     error ExceedsTotalSupply();
     error InsufficientPayment();
 
-    // events
+    // event
     event InscriptionDeployed(
         address indexed tokenAddress, string symbol, uint256 totalSupply, uint256 perMint, uint256 price
     );
     event InscriptionMinted(address indexed tokenAddress, address indexed to, uint256 amount);
 
-    // token info
+    // token struct
     struct TokenInfo {
         uint256 totalSupply;
         uint256 perMint;
@@ -27,17 +29,28 @@ contract InscriptionLogicV2 is Initializable, OwnableUpgradeable {
         uint256 price;
     }
 
-    // token info mapping
-    mapping(address => TokenInfo) public tokenInfo;
+    // token info
+    mapping(address => TokenInfo) private _tokenInfo;
 
     // implementation contract
-    address public implementationContract;
+    address private _implementationContract;
 
-    function initialize() public reinitializer(2) {
-        implementationContract = address(new InscriptionToken());
+    constructor() {
+        // disable initializer
+        _disableInitializers();
     }
 
-    // deploy inscription token
+    // upgradeable init
+    function initialize(address initialOwner) public reinitializer(2) {
+        __Ownable_init(initialOwner);
+        __UUPSUpgradeable_init();
+
+        // Deploy a token implementation contract as template
+        InscriptionToken tokenImpl = new InscriptionToken();
+        _implementationContract = address(tokenImpl);
+    }
+
+    // deploy inscription
     function deployInscription(
         string memory symbol,
         uint256 totalSupply,
@@ -47,26 +60,23 @@ contract InscriptionLogicV2 is Initializable, OwnableUpgradeable {
         external
         returns (address)
     {
-        // if perMint exceeds totalSupply, revert
         if (perMint > totalSupply) revert PerMintExceedsTotalSupply();
 
-        // clone implementation contract
-        address newToken = Clones.clone(implementationContract);
+        // Create new token using clone pattern
+        address newToken = Clones.clone(_implementationContract);
 
-        // initialize the token
+        // Initialize the new token
         InscriptionToken(newToken).initialize(symbol, symbol, address(this));
 
-        // store token info
-        tokenInfo[newToken] = TokenInfo({ totalSupply: totalSupply, perMint: perMint, mintedAmount: 0, price: price });
+        _tokenInfo[newToken] = TokenInfo({ totalSupply: totalSupply, perMint: perMint, mintedAmount: 0, price: price });
 
-        // emit event
         emit InscriptionDeployed(newToken, symbol, totalSupply, perMint, price);
         return newToken;
     }
 
-    // mint inscription token (payable)
+    // mint inscription
     function mintInscription(address tokenAddr) external payable {
-        TokenInfo storage info = tokenInfo[tokenAddr];
+        TokenInfo storage info = _tokenInfo[tokenAddr];
         if (info.totalSupply == 0) revert TokenNotDeployedByFactory();
         if (info.mintedAmount + info.perMint > info.totalSupply) revert ExceedsTotalSupply();
         if (msg.value < info.price * info.perMint) revert InsufficientPayment();
@@ -81,4 +91,7 @@ contract InscriptionLogicV2 is Initializable, OwnableUpgradeable {
     function withdrawFees() external onlyOwner {
         payable(owner()).transfer(address(this).balance);
     }
+
+    // authorize upgrade only owner
+    function _authorizeUpgrade(address newImplementation) internal override onlyOwner { }
 }
