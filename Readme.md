@@ -88,3 +88,15 @@ forge script script/DeployProxy.s.sol:DeployProxyScript --rpc-url arbitrum_sepol
 Proxy deployed at: 0xc7B704D8D43e554518ed324fB85Cd7067B56591d
 ```
 
+
+## Deploy InscriptionV1
+```
+forge script script/DeployInscriptionV1.s.sol:DeployInscriptionV1Script --rpc-url arbitrum_sepolia --broadcast --verify -vvvv
+```
+
+## Result of "Deploy InscriptionV1"
+```
+txhash:https://sepolia.arbiscan.io/tx/0x0e625cf4320b3f73a0cb3f73a2dde50db3a376416b8816f8ca0714066714fa3b
+Deployed InscriptionV1 token address: 0xe413e5d03880746377ff76e72c9174B487B78788
+```
+
