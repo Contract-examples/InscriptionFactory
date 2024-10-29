@@ -33,6 +33,9 @@ contract InscriptionTest is Test {
         // call initialize function using UUPS to deploy proxy
         bytes memory initData = abi.encodeWithSelector(InscriptionLogic.initialize.selector, owner);
         proxy = factory.deployProxy(address(logicV1), initData);
+
+        //  Proxy address: 0x2614Bb3b4da2DDCa628052316BEBf25e45FFF75d
+        console2.log("Proxy address:", address(proxy));
     }
 
     function test_DeployProxy() public {
@@ -42,8 +45,6 @@ contract InscriptionTest is Test {
     function test_DeployInscriptionV1() public {
         vm.startPrank(owner);
         InscriptionLogic logic = InscriptionLogic(proxy);
-
-        console2.log("Proxy address:", address(proxy));
 
         address token = logic.deployInscription("test1", 1000, 100);
         console2.log("Deployed token address:", token);
@@ -89,26 +90,26 @@ contract InscriptionTest is Test {
 
         InscriptionLogicV2 logicV2Instance = InscriptionLogicV2(proxy);
         address token = logicV2Instance.deployInscription("test2", 1000, 100, 0.1 ether);
-        
+
         console2.log("Deployed token address:", token);
         console2.log("Implementation contract:", logicV2Instance.implementationContract());
-        
+
         InscriptionLogicV2.TokenInfo memory info = logicV2Instance.getTokenInfo(token);
-        
+
         console2.log("Token info.totalSupply:", info.totalSupply);
         console2.log("Token info.perMint:", info.perMint);
         console2.log("Token info.mintedAmount:", info.mintedAmount);
         console2.log("Token info.price:", info.price);
-        
+
         vm.stopPrank();
 
         vm.deal(user1, 10 ether);
         vm.startPrank(user1);
         logicV2Instance.mintInscription{ value: 10 ether }(token);
-        
+
         console2.log("User1 balance:", user1.balance);
         console2.log("Proxy balance:", address(proxy).balance);
-        
+
         InscriptionToken inscriptionToken = InscriptionToken(token);
         assertEq(inscriptionToken.balanceOf(user1), 100);
         assertEq(address(proxy).balance, 10 ether);
@@ -127,16 +128,16 @@ contract InscriptionTest is Test {
         address token = logicV2Instance.deployInscription("test2", 1000, 100, 0.1 ether);
 
         console2.log("Deployed token address:", token);
-        console2.log("Implementation contract:", logicV2Instance.implementationContract()); 
+        console2.log("Implementation contract:", logicV2Instance.implementationContract());
 
         vm.stopPrank();
 
         vm.deal(user2, 10 ether);
         vm.startPrank(user2);
         logicV2Instance.mintInscription{ value: 10 ether }(token);
-        
+
         console2.log("User2 balance:", user2.balance);
-        console2.log("Proxy balance:", address(proxy).balance); 
+        console2.log("Proxy balance:", address(proxy).balance);
 
         vm.stopPrank();
 
@@ -149,7 +150,7 @@ contract InscriptionTest is Test {
         logicV2Instance.withdrawFees();
 
         console2.log("Owner balance after:", owner.balance);
-        console2.log("Proxy balance after:", address(proxy).balance); 
+        console2.log("Proxy balance after:", address(proxy).balance);
 
         assertEq(owner.balance - ownerBalanceBefore, 10 ether);
         assertEq(address(proxy).balance, 0);
