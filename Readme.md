@@ -129,13 +129,16 @@ txhash:https://sepolia.arbiscan.io/tx/0xf51eb88baf6e69d955cf6186b21258b8a2b41035
   Token info.price: 10000000000000000
 ```
 
-## Upgrade to V2
+## Mint InscriptionV2
 ```
 forge script script/MintInscriptionV2.s.sol:MintInscriptionV2Script --rpc-url arbitrum_sepolia --broadcast --verify -vvvv
 ```
 
-## Result of "Upgrade to V2"
+## Result of "Mint InscriptionV2"
 ```
-txhash:https://sepolia.arbiscan.io/tx/0x3089871cb71c7bdaa8ab944cb61a47c415a3af33e9678cafb691c6ffbc5b8f86
+txhash:https://sepolia.arbiscan.io/tx/0x47d31c20b4fbd681cef2ab6b76ac07a673e6fd97eac785d980c35e5032689251
+== Logs ==
+  User1 balance: 365739320539440000
+  Proxy balance: 11000000000000000
 ```
 
