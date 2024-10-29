@@ -3,6 +3,7 @@ pragma solidity ^0.8.28;
 
 import { Initializable } from "@openzeppelin-upgradeable/contracts/proxy/utils/Initializable.sol";
 import { OwnableUpgradeable } from "@openzeppelin-upgradeable/contracts/access/OwnableUpgradeable.sol";
+import { Clones } from "@openzeppelin/contracts/proxy/Clones.sol";
 import { InscriptionToken } from "./InscriptionToken.sol";
 
 contract InscriptionLogic is Initializable, OwnableUpgradeable {
@@ -31,19 +32,26 @@ contract InscriptionLogic is Initializable, OwnableUpgradeable {
 
     function initialize() public initializer {
         __Ownable_init(msg.sender);
+        implementationContract = address(new InscriptionToken());
     }
 
     // deploy inscription token
     function deployInscription(string memory symbol, uint256 totalSupply, uint256 perMint) external returns (address) {
+        // if perMint exceeds totalSupply, revert
         if (perMint > totalSupply) revert PerMintExceedsTotalSupply();
 
-        InscriptionToken newToken = new InscriptionToken();
+        // clone implementation contract
+        address newToken = Clones.clone(implementationContract);
 
-        tokenInfo[address(newToken)] =
-            TokenInfo({ totalSupply: totalSupply, perMint: perMint, mintedAmount: 0, price: 0 });
+        // initialize the token
+        InscriptionToken(newToken).initialize(symbol, symbol, address(this));
 
-        emit InscriptionDeployed(address(newToken), symbol, totalSupply, perMint);
-        return address(newToken);
+        // store token info
+        tokenInfo[newToken] = TokenInfo({ totalSupply: totalSupply, perMint: perMint, mintedAmount: 0, price: 0 });
+
+        // emit event
+        emit InscriptionDeployed(newToken, symbol, totalSupply, perMint);
+        return newToken;
     }
 
     // mint inscription token
