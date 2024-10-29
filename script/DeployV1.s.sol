@@ -17,9 +17,9 @@ contract DeployV1Script is Script {
         // start broadcast
         vm.startBroadcast(deployerPrivateKey);
 
-        // deploy TokenBank
+        // deploy
         InscriptionLogic logic = new InscriptionLogic{ salt: SALT }();
-        // InscriptionLogic deployed at: 0x6CeF682028A46015462b176c6F36d2BCb19515EE
+        // deployed at: 0x6CeF682028A46015462b176c6F36d2BCb19515EE
         console2.log("InscriptionLogic deployed at:", address(logic));
 
         // stop broadcast
