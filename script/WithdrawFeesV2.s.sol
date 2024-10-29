@@ -7,7 +7,7 @@ import "../src/InscriptionProxyFactory.sol";
 import "../src/InscriptionLogic.sol";
 import "../src/InscriptionLogicV2.sol";
 
-contract MintInscriptionV2Script is Script {
+contract WithdrawFeesV2Script is Script {
     //address constant V2_ADDRESS = address(0x5c77Ff2668b4defb7F17B74b9C3d05026E160F78);
     address constant PROXY_ADDRESS = address(0xc7B704D8D43e554518ed324fB85Cd7067B56591d);
     address constant TOKEN_V2_ADDRESS = address(0x8515DA19d3AbE74bbB2BfF5F6567443A2ef46A57);
@@ -22,16 +22,15 @@ contract MintInscriptionV2Script is Script {
 
         InscriptionLogicV2 logicV2 = InscriptionLogicV2(PROXY_ADDRESS);
 
-        logicV2.mintInscription{ value: 0.011 ether }(TOKEN_V2_ADDRESS);
+        logicV2.withdrawFees();
 
         console2.log("User balance:", deployerAddress.balance);
         console2.log("Proxy balance:", address(PROXY_ADDRESS).balance);
-
-        /*
-            == Logs ==
-            User balance: 365739320539440000
-            Proxy balance: 11000000000000000
-        */
+        /**
+         * == Logs ==
+         *         User balance: 376728045639440000
+         *         Proxy balance: 0
+         */
         // stop broadcast
         vm.stopBroadcast();
     }
