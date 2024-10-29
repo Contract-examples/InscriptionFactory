@@ -2,6 +2,7 @@
 pragma solidity ^0.8.28;
 
 import "forge-std/Test.sol";
+import "forge-std/console2.sol";
 import "../src/InscriptionProxyFactory.sol";
 import "../src/InscriptionLogic.sol";
 import "../src/InscriptionLogicV2.sol";
@@ -29,6 +30,7 @@ contract InscriptionTest is Test {
         factory = new InscriptionProxyFactory();
         logicV1 = new InscriptionLogic();
 
+        // call initialize function using UUPS pattern to deploy proxy
         bytes memory initData = abi.encodeWithSelector(InscriptionLogic.initialize.selector, owner);
         proxy = factory.deployProxy(address(logicV1), initData);
     }
@@ -41,10 +43,10 @@ contract InscriptionTest is Test {
         vm.startPrank(owner);
         InscriptionLogic logic = InscriptionLogic(proxy);
 
-        console.log("Proxy address:", address(proxy));
+        console2.log("Proxy address:", address(proxy));
 
         address token = logic.deployInscription("test1", 1000, 100);
-        console.log("Deployed token address:", token);
+        console2.log("Deployed token address:", token);
 
         assertTrue(token != address(0));
         InscriptionToken inscriptionToken = InscriptionToken(token);
