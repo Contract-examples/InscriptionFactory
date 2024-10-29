@@ -10,7 +10,7 @@ import "../src/InscriptionLogicV2.sol";
 contract DeployInscriptionV1Script is Script {
     address constant V1_ADDRESS = address(0x6CeF682028A46015462b176c6F36d2BCb19515EE);
     address constant PROXY_ADDRESS = address(0xc7B704D8D43e554518ed324fB85Cd7067B56591d);
-    address constant TOKEN_ADDRESS = address(0xe413e5d03880746377ff76e72c9174B487B78788);
+    //   address constant TOKEN_ADDRESS = address(0xe413e5d03880746377ff76e72c9174B487B78788);
 
     function run() external {
         // TODO: encrypt your private key
@@ -26,10 +26,9 @@ contract DeployInscriptionV1Script is Script {
         address token = logicV1.deployInscription("ISLC1", 1000, 100);
         console2.log("Deployed InscriptionV1 token address:", token);
 
-        InscriptionToken inscriptionToken = InscriptionToken(TOKEN_ADDRESS);
-
-        // InscriptionToken symbol: ISLC1
-        console2.log("InscriptionToken symbol:", inscriptionToken.symbol());
+        // InscriptionToken inscriptionToken = InscriptionToken(TOKEN_ADDRESS);
+        // // InscriptionToken symbol: ISLC1
+        // console2.log("InscriptionToken symbol:", inscriptionToken.symbol());
 
         // stop broadcast
         vm.stopBroadcast();
