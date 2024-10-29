@@ -7,7 +7,7 @@ import { OwnableUpgradeable } from "@openzeppelin-upgradeable/contracts/access/O
 import { Clones } from "@openzeppelin/contracts/proxy/Clones.sol";
 import { InscriptionToken } from "./InscriptionToken.sol";
 
-// V1 InscriptionLogic
+// V1 version
 contract InscriptionLogic is Initializable, UUPSUpgradeable, OwnableUpgradeable {
     // custom error
     error PerMintExceedsTotalSupply();
@@ -56,8 +56,10 @@ contract InscriptionLogic is Initializable, UUPSUpgradeable, OwnableUpgradeable 
         // Initialize the new token
         InscriptionToken(newToken).initialize(symbol, symbol, address(this));
 
+        // update token info
         tokenInfo[newToken] = TokenInfo({ totalSupply: totalSupply, perMint: perMint, mintedAmount: 0 });
 
+        // emit event
         emit InscriptionDeployed(newToken, symbol, totalSupply, perMint);
         return newToken;
     }
@@ -68,12 +70,16 @@ contract InscriptionLogic is Initializable, UUPSUpgradeable, OwnableUpgradeable 
         if (info.totalSupply == 0) revert TokenNotDeployedByFactory();
         if (info.mintedAmount + info.perMint > info.totalSupply) revert ExceedsTotalSupply();
 
+        // mint token
         InscriptionToken(tokenAddr).mint(msg.sender, info.perMint);
+
+        // update minted amount
         info.mintedAmount += info.perMint;
 
+        // emit event
         emit InscriptionMinted(tokenAddr, msg.sender, info.perMint);
     }
 
-    // authorize upgrade only owner
+    // authorize upgrade(only owner)
     function _authorizeUpgrade(address newImplementation) internal override onlyOwner { }
 }
