@@ -112,3 +112,20 @@ V2 deployed at:0x5c77Ff2668b4defb7F17B74b9C3d05026E160F78
 ```
 
 
+## Upgrade to V2
+```
+forge script script/UpgradeToV2.s.sol:UpgradeToV2Script --rpc-url arbitrum_sepolia --broadcast --verify -vvvv
+```
+
+## Result of "Upgrade to V2"
+```
+txhash:https://sepolia.arbiscan.io/tx/0x3089871cb71c7bdaa8ab944cb61a47c415a3af33e9678cafb691c6ffbc5b8f86
+  Deployed InscriptionLogicV2 token address: 0xFeBcDAd45083e5b3eBf30e0F974FC081bcd76CF9
+  Implementation contract: 0x267dcfe927125553108D305a4b398041115bd8Da
+  Token info.totalSupply: 1000
+  Token info.perMint: 100
+  Token info.mintedAmount: 0
+  Token info.price: 10000000000000000
+```
+
+
