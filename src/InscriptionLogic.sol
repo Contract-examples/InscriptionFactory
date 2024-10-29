@@ -26,10 +26,10 @@ contract InscriptionLogic is Initializable, UUPSUpgradeable, OwnableUpgradeable 
     }
 
     // token info
-    mapping(address => TokenInfo) private _tokenInfo;
+    mapping(address => TokenInfo) public tokenInfo;
 
     // implementation contract
-    address private _implementationContract;
+    address public implementationContract;
 
     constructor() {
         // disable initializer
@@ -43,7 +43,7 @@ contract InscriptionLogic is Initializable, UUPSUpgradeable, OwnableUpgradeable 
 
         // Deploy a token implementation contract as template
         InscriptionToken tokenImpl = new InscriptionToken();
-        _implementationContract = address(tokenImpl);
+        implementationContract = address(tokenImpl);
     }
 
     // deploy inscription
@@ -51,12 +51,12 @@ contract InscriptionLogic is Initializable, UUPSUpgradeable, OwnableUpgradeable 
         if (perMint > totalSupply) revert PerMintExceedsTotalSupply();
 
         // Create new token using clone pattern
-        address newToken = Clones.clone(_implementationContract);
+        address newToken = Clones.clone(implementationContract);
 
         // Initialize the new token
         InscriptionToken(newToken).initialize(symbol, symbol, address(this));
 
-        _tokenInfo[newToken] = TokenInfo({ totalSupply: totalSupply, perMint: perMint, mintedAmount: 0 });
+        tokenInfo[newToken] = TokenInfo({ totalSupply: totalSupply, perMint: perMint, mintedAmount: 0 });
 
         emit InscriptionDeployed(newToken, symbol, totalSupply, perMint);
         return newToken;
@@ -64,7 +64,7 @@ contract InscriptionLogic is Initializable, UUPSUpgradeable, OwnableUpgradeable 
 
     // mint inscription
     function mintInscription(address tokenAddr) external {
-        TokenInfo storage info = _tokenInfo[tokenAddr];
+        TokenInfo storage info = tokenInfo[tokenAddr];
         if (info.totalSupply == 0) revert TokenNotDeployedByFactory();
         if (info.mintedAmount + info.perMint > info.totalSupply) revert ExceedsTotalSupply();
 

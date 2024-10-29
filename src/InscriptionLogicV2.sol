@@ -30,10 +30,10 @@ contract InscriptionLogicV2 is Initializable, UUPSUpgradeable, OwnableUpgradeabl
     }
 
     // token info
-    mapping(address => TokenInfo) private _tokenInfo;
+    mapping(address => TokenInfo) public tokenInfo;
 
     // implementation contract
-    address private _implementationContract;
+    address public implementationContract;
 
     constructor() {
         // disable initializer
@@ -47,7 +47,7 @@ contract InscriptionLogicV2 is Initializable, UUPSUpgradeable, OwnableUpgradeabl
 
         // Deploy a token implementation contract as template
         InscriptionToken tokenImpl = new InscriptionToken();
-        _implementationContract = address(tokenImpl);
+        implementationContract = address(tokenImpl);
     }
 
     // deploy inscription
@@ -63,12 +63,12 @@ contract InscriptionLogicV2 is Initializable, UUPSUpgradeable, OwnableUpgradeabl
         if (perMint > totalSupply) revert PerMintExceedsTotalSupply();
 
         // Create new token using clone pattern
-        address newToken = Clones.clone(_implementationContract);
+        address newToken = Clones.clone(implementationContract);
 
         // Initialize the new token
         InscriptionToken(newToken).initialize(symbol, symbol, address(this));
 
-        _tokenInfo[newToken] = TokenInfo({ totalSupply: totalSupply, perMint: perMint, mintedAmount: 0, price: price });
+        tokenInfo[newToken] = TokenInfo({ totalSupply: totalSupply, perMint: perMint, mintedAmount: 0, price: price });
 
         emit InscriptionDeployed(newToken, symbol, totalSupply, perMint, price);
         return newToken;
@@ -76,7 +76,7 @@ contract InscriptionLogicV2 is Initializable, UUPSUpgradeable, OwnableUpgradeabl
 
     // mint inscription
     function mintInscription(address tokenAddr) external payable {
-        TokenInfo storage info = _tokenInfo[tokenAddr];
+        TokenInfo storage info = tokenInfo[tokenAddr];
         if (info.totalSupply == 0) revert TokenNotDeployedByFactory();
         if (info.mintedAmount + info.perMint > info.totalSupply) revert ExceedsTotalSupply();
         if (msg.value < info.price * info.perMint) revert InsufficientPayment();
