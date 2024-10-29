@@ -47,13 +47,19 @@ contract InscriptionLogicV2 is Initializable, OwnableUpgradeable {
         external
         returns (address)
     {
+        // if perMint exceeds totalSupply, revert
         if (perMint > totalSupply) revert PerMintExceedsTotalSupply();
 
+        // clone implementation contract
         address newToken = Clones.clone(implementationContract);
+
+        // initialize the token
         InscriptionToken(newToken).initialize(symbol, symbol, address(this));
 
+        // store token info
         tokenInfo[newToken] = TokenInfo({ totalSupply: totalSupply, perMint: perMint, mintedAmount: 0, price: price });
 
+        // emit event
         emit InscriptionDeployed(newToken, symbol, totalSupply, perMint, price);
         return newToken;
     }
