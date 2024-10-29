@@ -16,7 +16,7 @@ contract InscriptionProxyFactory is Ownable {
     // event
     event ProxyDeployed(address indexed proxy, address indexed implementation);
 
-    constructor() Ownable(msg.sender) { }
+    constructor(address initialOwner) Ownable(initialOwner) { }
 
     // deploy proxy
     function deployProxy(address implementation, bytes calldata initData) external onlyOwner returns (address proxy) {
