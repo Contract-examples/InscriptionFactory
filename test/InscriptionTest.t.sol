@@ -27,7 +27,7 @@ contract InscriptionTest is Test {
     receive() external payable { }
 
     function setUp() public {
-        factory = new InscriptionProxyFactory();
+        factory = new InscriptionProxyFactory(owner);
         logicV1 = new InscriptionLogic();
 
         // call initialize function using UUPS to deploy proxy

@@ -13,13 +13,14 @@ contract DeployProxyFactoryScript is Script {
     function run() external {
         // TODO: encrypt your private key
         uint256 deployerPrivateKey = vm.envUint("SEPOLIA_WALLET_PRIVATE_KEY");
+        address deployerAddress = vm.addr(deployerPrivateKey);
 
         // start broadcast
         vm.startBroadcast(deployerPrivateKey);
 
         // deploy
-        InscriptionProxyFactory factory = new InscriptionProxyFactory{ salt: SALT }();
-        // deployed at: 0x698B7eb92Cc151f6D63667ca48130D8f554a53B4
+        InscriptionProxyFactory factory = new InscriptionProxyFactory{ salt: SALT }(deployerAddress);
+        // deployed at: 0x6b006fD6F9c965Ff2c6B7127Ecc2d230aCc18e76
         console2.log("factory deployed at:", address(factory));
 
         // stop broadcast
