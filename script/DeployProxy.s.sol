@@ -9,6 +9,7 @@ import "../src/InscriptionLogicV2.sol";
 
 contract DeployProxyScript is Script {
     address constant V1_ADDRESS = address(0x6CeF682028A46015462b176c6F36d2BCb19515EE);
+    address constant FACTORY_ADDRESS = address(0x698B7eb92Cc151f6D63667ca48130D8f554a53B4);
     address public proxy;
 
     function run() external {
@@ -17,7 +18,7 @@ contract DeployProxyScript is Script {
         address deployerAddress = vm.addr(deployerPrivateKey);
 
         // deploy
-        InscriptionProxyFactory factory = new InscriptionProxyFactory();
+        InscriptionProxyFactory factory = InscriptionProxyFactory(FACTORY_ADDRESS);
 
         // set v1 contract address
         InscriptionLogic logicV1 = InscriptionLogic(V1_ADDRESS);
