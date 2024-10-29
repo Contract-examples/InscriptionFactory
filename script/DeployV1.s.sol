@@ -19,7 +19,7 @@ contract DeployV1Script is Script {
 
         // deploy TokenBank
         InscriptionLogic logic = new InscriptionLogic{ salt: SALT }();
-        // InscriptionLogic deployed at: 0xdB3eF3cB3079C93A276A2B4B69087b8801727f64
+        // InscriptionLogic deployed at: 0x6CeF682028A46015462b176c6F36d2BCb19515EE
         console2.log("InscriptionLogic deployed at:", address(logic));
 
         // stop broadcast
