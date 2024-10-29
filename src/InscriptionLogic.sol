@@ -13,7 +13,6 @@ contract InscriptionLogic is Initializable, UUPSUpgradeable, OwnableUpgradeable 
     error PerMintExceedsTotalSupply();
     error TokenNotDeployedByFactory();
     error ExceedsTotalSupply();
-    error ImplementationNotSet();
 
     // event
     event InscriptionDeployed(address indexed tokenAddress, string symbol, uint256 totalSupply, uint256 perMint);
@@ -41,21 +40,14 @@ contract InscriptionLogic is Initializable, UUPSUpgradeable, OwnableUpgradeable 
     function initialize(address initialOwner) public initializer {
         __Ownable_init(initialOwner);
         __UUPSUpgradeable_init();
-    }
 
-    // set implementation contract only owner
-    function setImplementationContract(address implementation) external onlyOwner {
-        _implementationContract = implementation;
-    }
-
-    // get implementation contract
-    function getImplementationContract() public view returns (address) {
-        return _implementationContract;
+        // Deploy a token implementation contract as template
+        InscriptionToken tokenImpl = new InscriptionToken();
+        _implementationContract = address(tokenImpl);
     }
 
     // deploy inscription
     function deployInscription(string memory symbol, uint256 totalSupply, uint256 perMint) external returns (address) {
-        if (_implementationContract == address(0)) revert ImplementationNotSet();
         if (perMint > totalSupply) revert PerMintExceedsTotalSupply();
 
         // Create new token using clone pattern

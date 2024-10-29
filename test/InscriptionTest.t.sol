@@ -43,11 +43,6 @@ contract InscriptionTest is Test {
 
         console.log("Proxy address:", address(proxy));
 
-        InscriptionToken tokenImpl = new InscriptionToken();
-        console.log("Token implementation address:", address(tokenImpl));
-
-        logic.setImplementationContract(address(tokenImpl));
-
         address token = logic.deployInscription("test1", 1000, 100);
         console.log("Deployed token address:", token);
 
