@@ -142,3 +142,18 @@ txhash:https://sepolia.arbiscan.io/tx/0x47d31c20b4fbd681cef2ab6b76ac07a673e6fd97
   Proxy balance: 11000000000000000
 ```
 
+
+## Withdraw fee V2
+```
+forge script script/WithdrawFeesV2.s.sol:WithdrawFeesV2Script --rpc-url arbitrum_sepolia --broadcast --verify -vvvv
+```
+
+## Result of "Withdraw fee V2"
+```
+txhash:https://sepolia.arbiscan.io/tx/0x65d92d5bdc545cca9986a6723a25c3f857df49772eef75f9bbc63c2ff0c5c429
+== Logs ==
+  User balance: 376728045639440000
+  Proxy balance: 0
+```
+
+
