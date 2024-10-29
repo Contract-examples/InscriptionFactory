@@ -100,3 +100,15 @@ txhash:https://sepolia.arbiscan.io/tx/0x0e625cf4320b3f73a0cb3f73a2dde50db3a37641
 Deployed InscriptionV1 token address: 0xe413e5d03880746377ff76e72c9174B487B78788
 ```
 
+## Deploy V2
+```
+forge script script/DeployV2.s.sol:DeployV2Script --rpc-url arbitrum_sepolia --broadcast --verify -vvvv
+```
+
+## Result of "Deploy V2"
+```
+txhash:https://sepolia.arbiscan.io/tx/0xed817f928f6e8082e884ffae9bc4e97728660a9b71b9f57e91899f8ceabd0f34
+V2 deployed at:0x5c77Ff2668b4defb7F17B74b9C3d05026E160F78
+```
+
+
