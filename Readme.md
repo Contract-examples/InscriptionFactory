@@ -56,3 +56,14 @@ Suite result: ok. 5 passed; 0 failed; 0 skipped; finished in 1.76ms (2.41ms CPU 
 
 Ran 1 test suite in 16.89ms (1.76ms CPU time): 5 tests passed, 0 failed, 0 skipped (5 total tests)
 ```
+
+## Deploy V1
+```
+forge script script/DeployV1.s.sol:DeployV1Script --rpc-url arbitrum_sepolia --broadcast --verify -vvvv
+```
+
+## Result of deploy
+```
+https://sepolia.arbiscan.io/address/0x6cef682028a46015462b176c6f36d2bcb19515ee
+```
+
