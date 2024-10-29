@@ -1,42 +1,30 @@
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.28;
 
-import {
-    TransparentUpgradeableProxy,
-    ITransparentUpgradeableProxy
-} from "@openzeppelin/contracts/proxy/transparent/TransparentUpgradeableProxy.sol";
-import { ProxyAdmin } from "@openzeppelin/contracts/proxy/transparent/ProxyAdmin.sol";
+import { UUPSUpgradeable } from "@openzeppelin-upgradeable/contracts/proxy/utils/UUPSUpgradeable.sol";
+import { ERC1967Proxy } from "@openzeppelin/contracts/proxy/ERC1967/ERC1967Proxy.sol";
 import { Ownable } from "@openzeppelin/contracts/access/Ownable.sol";
 
+// UUPS proxy factory(ERC1967)
 contract InscriptionProxyFactory is Ownable {
-    // custom errors
+    // custom error
     error ProxyDeployFailed();
     error UpgradeFailed();
 
-    // events
+    // event
     event ProxyDeployed(address indexed proxy, address indexed implementation);
-    event ProxyUpgraded(address indexed proxy, address indexed implementation);
 
-    ProxyAdmin public immutable proxyAdmin;
-
-    constructor() Ownable(msg.sender) {
-        proxyAdmin = new ProxyAdmin(msg.sender);
-    }
+    constructor() Ownable(msg.sender) { }
 
     // deploy proxy
     function deployProxy(address implementation, bytes calldata initData) external onlyOwner returns (address proxy) {
-        proxy = address(new TransparentUpgradeableProxy(implementation, address(proxyAdmin), initData));
+        // use erc1967 proxy to deploy proxy
+        proxy = address(new ERC1967Proxy(implementation, initData));
         if (proxy == address(0)) revert ProxyDeployFailed();
 
+        // emit event
         emit ProxyDeployed(proxy, implementation);
     }
-
-    // upgrade proxy
-    function upgradeProxy(address proxy, address newImplementation, bytes calldata data) external onlyOwner {
-        try proxyAdmin.upgradeAndCall(ITransparentUpgradeableProxy(proxy), newImplementation, data) {
-            emit ProxyUpgraded(proxy, newImplementation);
-        } catch {
-            revert UpgradeFailed();
-        }
-    }
 }
+
+
