@@ -9,7 +9,6 @@ import { Ownable } from "@openzeppelin/contracts/access/Ownable.sol";
 contract InscriptionProxyFactory is Ownable {
     // custom error
     error ProxyDeployFailed();
-    error UpgradeFailed();
 
     // event
     event ProxyDeployed(address indexed proxy, address indexed implementation);
@@ -26,5 +25,3 @@ contract InscriptionProxyFactory is Ownable {
         emit ProxyDeployed(proxy, implementation);
     }
 }
-
-
