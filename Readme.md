@@ -74,7 +74,7 @@ forge script script/DeployProxyFactory.s.sol:DeployProxyFactoryScript --rpc-url 
 
 ## Result of "Deploy ProxyFactory"
 ```
-factory deployed at: 0x698B7eb92Cc151f6D63667ca48130D8f554a53B4
+factory deployed at: 0x6b006fD6F9c965Ff2c6B7127Ecc2d230aCc18e76 
 ```
 
 
