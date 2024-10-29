@@ -23,10 +23,10 @@ contract InscriptionLogicV2 is Initializable, UUPSUpgradeable, OwnableUpgradeabl
 
     // token struct
     struct TokenInfo {
-        uint256 totalSupply;
-        uint256 perMint;
-        uint256 mintedAmount;
-        uint256 price;
+        uint256 totalSupply; // total supply
+        uint256 perMint; // per mint amount
+        uint256 mintedAmount; // minted amount
+        uint256 price; // price
     }
 
     // token info
