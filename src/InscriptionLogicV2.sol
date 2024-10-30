@@ -80,6 +80,7 @@ contract InscriptionLogicV2 is Initializable, UUPSUpgradeable, OwnableUpgradeabl
     // mint inscription
     function mintInscription(address tokenAddr) external payable {
         TokenInfo storage info = tokenInfo[tokenAddr];
+
         // check token is deployed by factory
         if (info.totalSupply == 0) revert TokenNotDeployedByFactory();
         // check per mint amount
