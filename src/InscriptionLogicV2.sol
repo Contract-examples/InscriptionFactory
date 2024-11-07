@@ -68,6 +68,8 @@ contract InscriptionLogicV2 is
         uint256 price
     )
         external
+        nonReentrant
+        whenNotPaused
         returns (address)
     {
         // check per mint amount
