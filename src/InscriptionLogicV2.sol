@@ -6,9 +6,17 @@ import { Initializable } from "@openzeppelin-upgradeable/contracts/proxy/utils/I
 import { OwnableUpgradeable } from "@openzeppelin-upgradeable/contracts/access/OwnableUpgradeable.sol";
 import { Clones } from "@openzeppelin/contracts/proxy/Clones.sol";
 import { InscriptionToken } from "./InscriptionToken.sol";
+import { ReentrancyGuardUpgradeable } from "@openzeppelin-upgradeable/contracts/utils/ReentrancyGuardUpgradeable.sol";
+import { PausableUpgradeable } from "@openzeppelin-upgradeable/contracts/utils/PausableUpgradeable.sol";
 
 // V2 version
-contract InscriptionLogicV2 is Initializable, UUPSUpgradeable, OwnableUpgradeable {
+contract InscriptionLogicV2 is
+    Initializable,
+    UUPSUpgradeable,
+    OwnableUpgradeable,
+    ReentrancyGuardUpgradeable,
+    PausableUpgradeable
+{
     // custom error
     error PerMintExceedsTotalSupply();
     error TokenNotDeployedByFactory();
@@ -44,6 +52,8 @@ contract InscriptionLogicV2 is Initializable, UUPSUpgradeable, OwnableUpgradeabl
     function initialize(address initialOwner) public reinitializer(2) {
         __Ownable_init(initialOwner);
         __UUPSUpgradeable_init();
+        __ReentrancyGuard_init();
+        __Pausable_init();
 
         // Deploy a token implementation contract as template
         InscriptionToken tokenImpl = new InscriptionToken();
@@ -78,7 +88,7 @@ contract InscriptionLogicV2 is Initializable, UUPSUpgradeable, OwnableUpgradeabl
     }
 
     // mint inscription
-    function mintInscription(address tokenAddr) external payable {
+    function mintInscription(address tokenAddr) external payable nonReentrant whenNotPaused {
         TokenInfo storage info = tokenInfo[tokenAddr];
 
         // check token is deployed by factory
@@ -100,7 +110,7 @@ contract InscriptionLogicV2 is Initializable, UUPSUpgradeable, OwnableUpgradeabl
     }
 
     // withdraw fees
-    function withdrawFees() external onlyOwner {
+    function withdrawFees() external onlyOwner nonReentrant {
         payable(owner()).transfer(address(this).balance);
     }
 
@@ -110,5 +120,15 @@ contract InscriptionLogicV2 is Initializable, UUPSUpgradeable, OwnableUpgradeabl
     // get token info
     function getTokenInfo(address token) external view returns (TokenInfo memory) {
         return tokenInfo[token];
+    }
+
+    // pause
+    function pause() external onlyOwner {
+        _pause();
+    }
+
+    // unpause
+    function unpause() external onlyOwner {
+        _unpause();
     }
 }
