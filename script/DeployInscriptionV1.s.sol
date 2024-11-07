@@ -9,7 +9,7 @@ import "../src/InscriptionLogicV2.sol";
 contract DeployInscriptionV1Script is Script {
     address constant V1_ADDRESS = address(0x6CeF682028A46015462b176c6F36d2BCb19515EE);
     address constant PROXY_ADDRESS = address(0x73C21e4421591BBeDd71caF6d8dAA078c95b95c7);
-    //   address constant TOKEN_ADDRESS = address(0xe413e5d03880746377ff76e72c9174B487B78788);
+    //   address constant TOKEN_ADDRESS = address(0x4117bBa2d4EDBf3ef87e4e5A058b28C4fDB05C4D);
 
     function run() external {
         // TODO: encrypt your private key

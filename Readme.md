@@ -91,8 +91,8 @@ forge script script/DeployInscriptionV1.s.sol:DeployInscriptionV1Script --rpc-ur
 
 ## Result of "Deploy InscriptionV1"
 ```
-txhash:https://sepolia.arbiscan.io/tx/0x0e625cf4320b3f73a0cb3f73a2dde50db3a376416b8816f8ca0714066714fa3b
-Deployed InscriptionV1 token address: 0xe413e5d03880746377ff76e72c9174B487B78788
+txhash:https://sepolia.arbiscan.io/tx/0x8afc8aeb1e7a57a5d6facd3949d72ef227d66b22eb7e37536425f690a18ac561
+Deployed InscriptionV1 token address: 0x4117bBa2d4EDBf3ef87e4e5A058b28C4fDB05C4D
 ```
 
 ## Deploy V2
