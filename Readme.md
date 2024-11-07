@@ -116,8 +116,8 @@ forge script script/UpgradeToV2.s.sol:UpgradeToV2Script --rpc-url arbitrum_sepol
 ```
 txhash:https://sepolia.arbiscan.io/tx/0xf51eb88baf6e69d955cf6186b21258b8a2b410350eefa6c075a361387b339013
 == Logs ==
-  Deployed InscriptionLogicV2 token address: 0x8515DA19d3AbE74bbB2BfF5F6567443A2ef46A57
-  Implementation contract: 0x267dcfe927125553108D305a4b398041115bd8Da
+  Deployed InscriptionLogicV2 token address: 0xdF23b8D5FfA1Ad1F2ef08B7C2963A19a9aD894A9
+  Implementation contract: 0x3ccfCf3B88593CaA22Fec5376c28E7F42A8B5b9e
   Token info.totalSupply: 1000
   Token info.perMint: 1
   Token info.mintedAmount: 0

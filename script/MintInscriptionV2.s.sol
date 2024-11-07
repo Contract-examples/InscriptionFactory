@@ -9,7 +9,7 @@ import "../src/InscriptionLogicV2.sol";
 contract MintInscriptionV2Script is Script {
     //address constant V2_ADDRESS = address(0x5c77Ff2668b4defb7F17B74b9C3d05026E160F78);
     address constant PROXY_ADDRESS = address(0x73C21e4421591BBeDd71caF6d8dAA078c95b95c7);
-    address constant TOKEN_V2_ADDRESS = address(0x8515DA19d3AbE74bbB2BfF5F6567443A2ef46A57);
+    address constant TOKEN_V2_ADDRESS = address(0xdF23b8D5FfA1Ad1F2ef08B7C2963A19a9aD894A9);
 
     function run() external {
         // TODO: encrypt your private key
