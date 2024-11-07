@@ -3,7 +3,6 @@ pragma solidity ^0.8.28;
 
 import "forge-std/Script.sol";
 import "forge-std/console2.sol";
-import "../src/InscriptionProxyFactory.sol";
 import "../src/InscriptionLogic.sol";
 import "../src/InscriptionLogicV2.sol";
 

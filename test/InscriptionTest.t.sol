@@ -3,13 +3,15 @@ pragma solidity ^0.8.28;
 
 import "forge-std/Test.sol";
 import "forge-std/console2.sol";
-import "../src/InscriptionProxyFactory.sol";
+import "@uups-proxy-factory-sdk/sdk/IUUPSProxyFactory.sol";
 import "../src/InscriptionLogic.sol";
 import "../src/InscriptionLogicV2.sol";
 import "../src/InscriptionToken.sol";
 
+bytes32 constant SALT = bytes32(uint256(0x0000000000000000000000000000000000000000d3bf2663da51c10215000003));
+
 contract InscriptionTest is Test {
-    InscriptionProxyFactory public factory;
+    IUUPSProxyFactory public factory;
     InscriptionLogic public logicV1;
     InscriptionLogicV2 public logicV2;
     address public proxy;
@@ -27,12 +29,12 @@ contract InscriptionTest is Test {
     receive() external payable { }
 
     function setUp() public {
-        factory = new InscriptionProxyFactory(owner);
+        factory = IUUPSProxyFactory(deployCode("../lib/UUPSProxyFactorySDK/abi/UUPSProxyFactory.sol:UUPSProxyFactory"));
         logicV1 = new InscriptionLogic();
 
         // call initialize function using UUPS to deploy proxy
         bytes memory initData = abi.encodeWithSelector(InscriptionLogic.initialize.selector, owner);
-        proxy = factory.deployProxy(address(logicV1), initData);
+        proxy = factory.deployProxy(address(logicV1), initData, SALT);
 
         //  Proxy address: 0x2614Bb3b4da2DDCa628052316BEBf25e45FFF75d
         console2.log("Proxy address:", address(proxy));
