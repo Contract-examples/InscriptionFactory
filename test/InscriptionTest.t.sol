@@ -149,7 +149,7 @@ contract InscriptionTest is Test {
 
         vm.deal(user1, 10 ether);
         vm.startPrank(user1);
-        vm.expectRevert(0xd93c0665);
+        vm.expectRevert(PausableUpgradeable.EnforcedPause.selector);
         logicV2Instance.mintInscription{ value: 10 ether }(token);
 
         console2.log("User1 balance:", user1.balance);
