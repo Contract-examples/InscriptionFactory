@@ -1,5 +1,5 @@
-InscriptionTest:test_DeployInscriptionV1() (gas: 212571)
+InscriptionTest:test_DeployInscriptionV1() (gas: 212604)
 InscriptionTest:test_DeployProxy() (gas: 5417)
 InscriptionTest:test_MintInscriptionV2() (gas: 3541609)
-InscriptionTest:test_UpgradeToV2() (gas: 3460134)
+InscriptionTest:test_UpgradeToV2() (gas: 3460167)
 InscriptionTest:test_WithdrawFeesV2() (gas: 3548530)
