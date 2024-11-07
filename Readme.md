@@ -131,7 +131,7 @@ forge script script/MintInscriptionV2.s.sol:MintInscriptionV2Script --rpc-url ar
 
 ## Result of "Mint InscriptionV2"
 ```
-txhash:https://sepolia.arbiscan.io/tx/0x47d31c20b4fbd681cef2ab6b76ac07a673e6fd97eac785d980c35e5032689251
+txhash:https://sepolia.arbiscan.io/tx/0xba9b9f520a325f160c0d4040c3aa9f136c54dfbe08d2c7428ae449d15ec46a11
 == Logs ==
   User balance: 365739320539440000
   Proxy balance: 11000000000000000

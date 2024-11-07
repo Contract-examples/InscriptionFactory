@@ -28,7 +28,7 @@ contract MintInscriptionV2Script is Script {
 
         /*
             == Logs ==
-            User balance: 365739320539440000
+            User balance: 465081263447760000
             Proxy balance: 11000000000000000
         */
         // stop broadcast
