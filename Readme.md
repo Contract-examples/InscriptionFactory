@@ -15,16 +15,20 @@ forge test -vv
 ## The result of testing
 ```
 Ran 5 tests for test/InscriptionTest.t.sol:InscriptionTest
-[PASS] test_DeployInscriptionV1() (gas: 213221)
+[PASS] test_DeployInscriptionV1() (gas: 212604)
 Logs:
-  Proxy address: 0x104fBc016F4bb334D775a19E8A6510109AC63E00
-  Deployed token address: 0x0401911641c4781D93c41f9aa8094B171368E6a9
+  Proxy address: 0x2614Bb3b4da2DDCa628052316BEBf25e45FFF75d
+  Deployed token address: 0xB7832aeA4E300C0b7E1BD0F34bA4CF0a62202aAA
 
 [PASS] test_DeployProxy() (gas: 5417)
+Logs:
+  Proxy address: 0x2614Bb3b4da2DDCa628052316BEBf25e45FFF75d
+
 [PASS] test_MintInscriptionV2() (gas: 3541609)
 Logs:
-  Deployed token address: 0x20067a7558168e12ad53b235F2f7408FeEa4985F
-  Implementation contract: 0x0401911641c4781D93c41f9aa8094B171368E6a9
+  Proxy address: 0x2614Bb3b4da2DDCa628052316BEBf25e45FFF75d
+  Deployed token address: 0xf7a06Dd7aB15e561A712431f48c17E6e7c8c1a2f
+  Implementation contract: 0xB7832aeA4E300C0b7E1BD0F34bA4CF0a62202aAA
   Token info.totalSupply: 1000
   Token info.perMint: 100
   Token info.mintedAmount: 0
@@ -32,10 +36,11 @@ Logs:
   User1 balance: 0
   Proxy balance: 10000000000000000000
 
-[PASS] test_UpgradeToV2() (gas: 3460134)
+[PASS] test_UpgradeToV2() (gas: 3460167)
 Logs:
-  Deployed token address: 0x20067a7558168e12ad53b235F2f7408FeEa4985F
-  Implementation contract: 0x0401911641c4781D93c41f9aa8094B171368E6a9
+  Proxy address: 0x2614Bb3b4da2DDCa628052316BEBf25e45FFF75d
+  Deployed token address: 0xf7a06Dd7aB15e561A712431f48c17E6e7c8c1a2f
+  Implementation contract: 0xB7832aeA4E300C0b7E1BD0F34bA4CF0a62202aAA
   Token info.totalSupply: 1000
   Token info.perMint: 100
   Token info.mintedAmount: 0
@@ -43,8 +48,9 @@ Logs:
 
 [PASS] test_WithdrawFeesV2() (gas: 3548530)
 Logs:
-  Deployed token address: 0x20067a7558168e12ad53b235F2f7408FeEa4985F
-  Implementation contract: 0x0401911641c4781D93c41f9aa8094B171368E6a9
+  Proxy address: 0x2614Bb3b4da2DDCa628052316BEBf25e45FFF75d
+  Deployed token address: 0xf7a06Dd7aB15e561A712431f48c17E6e7c8c1a2f
+  Implementation contract: 0xB7832aeA4E300C0b7E1BD0F34bA4CF0a62202aAA
   User2 balance: 0
   Proxy balance: 10000000000000000000
   Owner balance before: 79228162514264337593543950335
@@ -52,9 +58,9 @@ Logs:
   Owner balance after: 79228162524264337593543950335
   Proxy balance after: 0
 
-Suite result: ok. 5 passed; 0 failed; 0 skipped; finished in 1.76ms (2.41ms CPU time)
+Suite result: ok. 5 passed; 0 failed; 0 skipped; finished in 2.94ms (2.77ms CPU time)
 
-Ran 1 test suite in 16.89ms (1.76ms CPU time): 5 tests passed, 0 failed, 0 skipped (5 total tests)
+Ran 1 test suite in 13.44ms (2.94ms CPU time): 5 tests passed, 0 failed, 0 skipped (5 total tests)
 ```
 
 ## Deploy V1
