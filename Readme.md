@@ -80,7 +80,7 @@ forge script script/DeployProxy.s.sol:DeployProxyScript --rpc-url arbitrum_sepol
 
 ## Result of "Deploy Proxy"
 ```
-Proxy deployed at: 0xc7B704D8D43e554518ed324fB85Cd7067B56591d
+Proxy deployed at: 0x73C21e4421591BBeDd71caF6d8dAA078c95b95c7
 ```
 
 
