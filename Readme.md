@@ -145,9 +145,9 @@ forge script script/WithdrawFeesV2.s.sol:WithdrawFeesV2Script --rpc-url arbitrum
 
 ## Result of "Withdraw fee V2"
 ```
-txhash:https://sepolia.arbiscan.io/tx/0x65d92d5bdc545cca9986a6723a25c3f857df49772eef75f9bbc63c2ff0c5c429
+txhash:https://sepolia.arbiscan.io/tx/0xd112f4ad1686009751b19cad5583b494bfd88e96be9aa4504caf58d7384045ff
 == Logs ==
-  User balance: 376728045639440000
+  User balance: 476069695147760000
   Proxy balance: 0
 ```
 
