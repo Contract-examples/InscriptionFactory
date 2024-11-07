@@ -8,7 +8,7 @@ import "../src/InscriptionLogicV2.sol";
 
 contract WithdrawFeesV2Script is Script {
     //address constant V2_ADDRESS = address(0x5c77Ff2668b4defb7F17B74b9C3d05026E160F78);
-    address constant PROXY_ADDRESS = address(0xc7B704D8D43e554518ed324fB85Cd7067B56591d);
+    address constant PROXY_ADDRESS = address(0x73C21e4421591BBeDd71caF6d8dAA078c95b95c7);
     address constant TOKEN_V2_ADDRESS = address(0x8515DA19d3AbE74bbB2BfF5F6567443A2ef46A57);
 
     function run() external {
