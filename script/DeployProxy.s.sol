@@ -33,7 +33,7 @@ contract DeployProxyScript is Script {
 
         proxy = factory.deployProxy(address(logicV1), initData, SALT);
 
-        // deployed at: 0xc7B704D8D43e554518ed324fB85Cd7067B56591d
+        // deployed at: 0x73C21e4421591BBeDd71caF6d8dAA078c95b95c7
         console2.log("Proxy deployed at:", address(proxy));
 
         // stop broadcast
