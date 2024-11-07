@@ -73,12 +73,6 @@ forge script script/DeployV1.s.sol:DeployV1Script --rpc-url arbitrum_sepolia --b
 V1 deployed at:0x6CeF682028A46015462b176c6F36d2BCb19515EE
 ```
 
-## Deploy ProxyFactory
-```
-forge script script/DeployProxyFactory.s.sol:DeployProxyFactoryScript --rpc-url arbitrum_sepolia --broadcast --verify -vvvv
-```
-
-
 ## Deploy Proxy
 ```
 forge script script/DeployProxy.s.sol:DeployProxyScript --rpc-url arbitrum_sepolia --broadcast --verify -vvvv
