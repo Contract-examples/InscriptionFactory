@@ -6,7 +6,8 @@ import { Initializable } from "@openzeppelin-upgradeable/contracts/proxy/utils/I
 import { OwnableUpgradeable } from "@openzeppelin-upgradeable/contracts/access/OwnableUpgradeable.sol";
 import { Clones } from "@openzeppelin/contracts/proxy/Clones.sol";
 import { InscriptionToken } from "./InscriptionToken.sol";
-import { ReentrancyGuardUpgradeable } from "@openzeppelin-upgradeable/contracts/utils/ReentrancyGuardUpgradeable.sol";
+import { ReentrancyGuardTransientUpgradeable } from
+    "@openzeppelin-upgradeable/contracts/utils/ReentrancyGuardTransientUpgradeable.sol";
 import { PausableUpgradeable } from "@openzeppelin-upgradeable/contracts/utils/PausableUpgradeable.sol";
 
 // V2 version
@@ -14,7 +15,7 @@ contract InscriptionLogicV2 is
     Initializable,
     UUPSUpgradeable,
     OwnableUpgradeable,
-    ReentrancyGuardUpgradeable,
+    ReentrancyGuardTransientUpgradeable,
     PausableUpgradeable
 {
     // custom error
@@ -52,7 +53,7 @@ contract InscriptionLogicV2 is
     function initialize(address initialOwner) public reinitializer(2) {
         __Ownable_init(initialOwner);
         __UUPSUpgradeable_init();
-        __ReentrancyGuard_init();
+        __ReentrancyGuardTransient_init();
         __Pausable_init();
 
         // Deploy a token implementation contract as template
